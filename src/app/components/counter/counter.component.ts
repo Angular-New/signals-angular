@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, Signal, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, Signal, signal, untracked, WritableSignal } from '@angular/core';
 
 @Component({
   selector: 'sg-counter',
@@ -14,6 +14,9 @@ export class CounterComponent {
   // computed работает, принимая один или несколько исходных сигналов и создавая новый сигнал
   // когда исходный сигнал изменяется (в нашем случае сигнал счетчика), вычисленный сигнал «deriveCounter» также мгновенно обновляется
   public derivedCounter: Signal<number> = computed(() => this.counter() * 10);
+
+  // используя untracked(), мы можем получить доступ к значению сигнала счетчика, не создавая зависимости между счетчиком и сигналом DerivedCounter
+  public untrackedDerivedCounter: Signal<number> = computed(() => untracked(this.counter) + 1);
 
   public increment(): void {
     console.log(`Updating counter...`);
