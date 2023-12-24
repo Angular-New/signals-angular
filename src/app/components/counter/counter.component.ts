@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, Signal, signal, WritableSignal } from '@angular/core';
 
 @Component({
   selector: 'sg-counter',
@@ -10,6 +10,10 @@ import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@ang
 })
 export class CounterComponent {
   public counter: WritableSignal<number> = signal(0);
+
+  // computed работает, принимая один или несколько исходных сигналов и создавая новый сигнал
+  // когда исходный сигнал изменяется (в нашем случае сигнал счетчика), вычисленный сигнал «deriveCounter» также мгновенно обновляется
+  public derivedCounter: Signal<number> = computed(() => this.counter() * 10);
 
   public increment(): void {
     console.log(`Updating counter...`);
