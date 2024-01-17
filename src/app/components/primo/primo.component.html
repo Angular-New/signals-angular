@@ -1,0 +1,23 @@
+<ul>
+  @for (vehicle of vehicles(); track vehicle) {
+    <li>{{ vehicle.model | uppercase }}: {{ vehicle.price }}</li>
+  }
+</ul>
+<hr />
+
+<div>quantity selected: {{ quantity() }}</div>
+<select
+  (change)="onQuantitySelected($any($event.target).value)"
+  [ngModel]="quantity"
+>
+  <option disabled value="">--Select of quantity--</option>
+  @for (qty of qts(); track $index) {
+    <option>{{ qty }}</option>
+  }
+</select>
+
+<button (click)="onDuplicateQuantity()">duplicate order quantity</button>
+
+<hr />
+<div class="total-price">total price: {{ totalPrice() }}</div>
+<button>change price of {{ vehicles()[0].model | uppercase }}</button>

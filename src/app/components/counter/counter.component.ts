@@ -3,7 +3,6 @@ import { ChangeDetectionStrategy, Component, computed, Signal, signal, untracked
 @Component({
   selector: 'sg-counter',
   standalone: true,
-  imports: [],
   templateUrl: './counter.component.html',
   styleUrl: './counter.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
